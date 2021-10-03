@@ -15,15 +15,12 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 	accessToken: API_KEY
 });
 
-// ------ DELIVERABLE 3 -------------------
 // Create a third tile layer that will be the background of our map.
 let darkMap = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
 	maxZoom: 18,
 	accessToken: API_KEY
 });
-
-// -------End Delv 3 ----------
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
@@ -42,10 +39,8 @@ let baseMaps = {
 // 1. Add a 2nd layer group for the tectonic plate data.
 let allEarthquakes = new L.LayerGroup(); 
 
-// ------DELIVERABLE 1 -------------
 let allTectonics = new L.LayerGroup();
 
-// -----DELIVERABLE 2 ---------
 let majorEQ = new L.LayerGroup();
 
 // 2. Add a reference to the tectonic plates group to the overlays object.
@@ -77,7 +72,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     };
   }
 
-  // ----DELIVERABLE 2 ----------------
   // 5. Change the color function to use three colors for the major earthquakes based on the magnitude of the earthquake.
   function newStyleInfo(feature) {
     return {
@@ -99,7 +93,6 @@ function largetColor(magnitude) {
   }
   return "#ee9c00";
 }
-//  -----end Delv 2 --------------------------
 
   // This function determines the color of the marker based on the magnitude of the earthquake.
   function getColor(magnitude) {
@@ -120,10 +113,7 @@ function largetColor(magnitude) {
     }
     return "#98ee00";
   }
-
-  // -- DELIVERABLE 2 -----------
   // 6. Use the function that determines the radius of the earthquake marker based on its magnitude.
-
   // This function determines the radius of the earthquake marker based on its magnitude.
   // Earthquakes with a magnitude of 0 were being plotted with the wrong radius.
   function getRadius(magnitude) {
@@ -152,7 +142,6 @@ function largetColor(magnitude) {
   // Then we add the earthquake layer to our map.
   allEarthquakes.addTo(map);
 
-// 3. ------DELIVERABLE 2 ------
 // 3. Retrieve the major earthquake GeoJSON data >4.5 mag for the week.
 let majEQData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson";
 d3.json(majEQData).then(function(data) {
@@ -175,9 +164,6 @@ onEachFeature: function(feature, layer) {
 }).addTo(majorEQ);
 // 9. Close the braces and parentheses for the major earthquake data.
 });
-
-
-// ------end Del 2 ------------
 
   // Here we create a legend control object.
 let legend = L.control({
@@ -229,7 +215,6 @@ legend.onAdd = function() {
     }
       ).addTo(allTectonics);
 
-    // --- DELIVERABLE 1------
     // Then we add the Tectonic layer to our map.
   allTectonics.addTo(map);
   }); 
